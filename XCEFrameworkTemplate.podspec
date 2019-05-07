@@ -3,9 +3,9 @@ Pod::Spec.new do |s|
     s.name          = 'XCEFrameworkTemplate'
     s.summary       = 'Repo description'
     s.version       = '0.0.1'
-    s.homepage      = 'https://XCEssentials.github.io/XCEFrameworkTemplate'
+    s.homepage      = 'https://XCEssentials.github.io/FrameworkTemplate'
 
-    s.source        = { :git => 'https://github.com/XCEssentials/XCEFrameworkTemplate.git', :tag => s.version }
+    s.source        = { :git => 'https://github.com/XCEssentials/FrameworkTemplate.git', :tag => s.version }
 
     s.requires_arc  = true
 
@@ -19,6 +19,10 @@ Pod::Spec.new do |s|
 
     s.cocoapods_version = '>= 1.5.3'
 
+    # === tvos
+
+    s.tvos.deployment_target = '9.0'
+
     # === ios
 
     s.ios.deployment_target = '9.0'
@@ -26,10 +30,6 @@ Pod::Spec.new do |s|
     # === osx
 
     s.osx.deployment_target = '10.11'
-
-    # === tvos
-
-    s.tvos.deployment_target = '9.0'
 
     # === SUBSPECS ===
 

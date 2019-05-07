@@ -182,7 +182,7 @@ try License
 try CocoaPods
     .Podspec
     .withSubSpecs(
-        product: cocoaPod.product,
+        project: project,
         company: cocoaPod.company,
         version: cocoaPod.currentVersion,
         license: license,
