@@ -47,9 +47,7 @@ var cocoaPod = try Spec.CocoaPod(
     ]
 )
 
-try? cocoaPod.readCurrentVersion(
-    callFastlane: .viaBundler
-)
+try? cocoaPod.readCurrentVersion()
 
 let subSpecs = (
     core: Spec.CocoaPod.SubSpec("Core"),
@@ -266,7 +264,7 @@ try Fastlane
                 // NOTE: regardless of subspecs, targets are generated per platform
                 targetNames: project
                     .deploymentTargets
-                    .keys
+                    .map{ $0.platform }
                     .map{ "\(cocoaPod.product.name)-\($0.rawValue)-Unit-\(subSpecs.tests.name)" },
                 executableAt: .currentFolder, // this is how 'cocoapods-generate' works
                 params: [

@@ -19,13 +19,13 @@ Pod::Spec.new do |s|
 
     s.cocoapods_version = '>= 1.5.3'
 
-    # === tvos
-
-    s.tvos.deployment_target = '9.0'
-
     # === ios
 
     s.ios.deployment_target = '9.0'
+
+    # === tvos
+
+    s.tvos.deployment_target = '9.0'
 
     # === osx
 

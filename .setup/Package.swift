@@ -7,7 +7,7 @@ let package = Package(
     name: "FrameworkTemplateSetup",
     dependencies: [
         .package(url: "https://github.com/nvzqz/FileKit", from: "5.2.0"),
-        .package(url: "https://github.com/XCEssentials/RepoConfigurator", from: "2.0.0")
+        .package(url: "https://github.com/XCEssentials/RepoConfigurator", from: "2.6.0")
     ],
     targets: [
         .target(
