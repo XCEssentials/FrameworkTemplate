@@ -79,17 +79,17 @@ lane :generateProjectViaCP do
 
     sh 'cd ./.. && rm -rf "Xcode" && bundle exec pod gen --gen-directory="Xcode"'
 
-    # === Build Phase Script - SwiftLint | 'XCEFrameworkTemplate-iOS-Unit-AllTests', 'XCEFrameworkTemplate-tvOS-Unit-AllTests', 'XCEFrameworkTemplate-macOS-Unit-AllTests' | ./../Xcode/XCEFrameworkTemplate/Pods.xcodeproj
+    # === Build Phase Script - SwiftLint | 'XCEFrameworkTemplate-iOS-Unit-AllTests', 'XCEFrameworkTemplate-tvOS-Unit-AllTests', 'XCEFrameworkTemplate-macOS-Unit-AllTests' | ../Xcode/XCEFrameworkTemplate/Pods.xcodeproj
 
     begin
 
-        project = Xcodeproj::Project.open("./../Xcode/XCEFrameworkTemplate/Pods.xcodeproj")
+        project = Xcodeproj::Project.open("../Xcode/XCEFrameworkTemplate/Pods.xcodeproj")
 
     rescue => ex
 
         # https://github.com/fastlane/fastlane/issues/7944#issuecomment-274232674
         UI.error ex
-        UI.error("Failed to add Build Phase Script - SwiftLint | 'XCEFrameworkTemplate-iOS-Unit-AllTests', 'XCEFrameworkTemplate-tvOS-Unit-AllTests', 'XCEFrameworkTemplate-macOS-Unit-AllTests' | ./../Xcode/XCEFrameworkTemplate/Pods.xcodeproj")
+        UI.error("Failed to add Build Phase Script - SwiftLint | 'XCEFrameworkTemplate-iOS-Unit-AllTests', 'XCEFrameworkTemplate-tvOS-Unit-AllTests', 'XCEFrameworkTemplate-macOS-Unit-AllTests' | ../Xcode/XCEFrameworkTemplate/Pods.xcodeproj")
 
     end
 
@@ -114,7 +114,7 @@ lane :generateProjectViaCP do
 
     project.save()
 
-    UI.success("Added Build Phase Script - SwiftLint | 'XCEFrameworkTemplate-iOS-Unit-AllTests', 'XCEFrameworkTemplate-tvOS-Unit-AllTests', 'XCEFrameworkTemplate-macOS-Unit-AllTests' | ./../Xcode/XCEFrameworkTemplate/Pods.xcodeproj")
+    UI.success("Added Build Phase Script - SwiftLint | 'XCEFrameworkTemplate-iOS-Unit-AllTests', 'XCEFrameworkTemplate-tvOS-Unit-AllTests', 'XCEFrameworkTemplate-macOS-Unit-AllTests' | ../Xcode/XCEFrameworkTemplate/Pods.xcodeproj")
 
 end # lane :generateProjectViaCP
 
