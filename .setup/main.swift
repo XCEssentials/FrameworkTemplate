@@ -34,6 +34,8 @@ let project = try Spec.Project(
     ]
 )
 
+let desktop = project.deploymentTargets[.macOS]!
+
 let license: CocoaPods.Podspec.License = (
     License.MIT.licenseType,
     License.MIT.relativeLocation
@@ -110,6 +112,7 @@ try Bundler
         """
         gem '\(CocoaPods.gemName)'
         gem '\(CocoaPods.Generate.gemName)'
+        gem '\(CocoaPods.Rome.gemName)'
         """
     )
     .prepare()
@@ -158,7 +161,11 @@ try allSubspecs
     .forEach{
         
         try SwiftLint
-            .standard()
+            .standard(
+                disabledRules: [
+                    "statement_position"
+                ]
+            )
             .prepare(
                 at: $0
             )
@@ -171,6 +178,26 @@ try License
     .MIT(
         copyrightYear: project.copyrightYear,
         copyrightEntity: cocoaPod.authors[0].name
+    )
+    .prepare()
+    .writeToFileSystem()
+
+// MARK: Write - CocoaPods - Podfile
+
+try CocoaPods
+    .Podfile()
+    .custom("""
+        platform :\(desktop.platform.cocoaPodsId), '\(desktop.minimumVersion)'
+
+        plugin '\(CocoaPods.Rome.gemName)'
+
+        target 'Abstract' do
+
+            pod 'SwiftLint'
+
+        end
+        
+        """
     )
     .prepare()
     .writeToFileSystem()
@@ -272,14 +299,37 @@ try Fastlane
                     // NOTE: the '${SRCROOT}' of 'Pods' points inside "./Xcode/XCEMyFwk/"
                     
                     """
-                    --path "${SRCROOT}/../../\(Spec.Locations.sources.string)"
+                    --path "${SRCROOT}/../../\(Spec.Locations.sources)"
                     """
                 ]
             )
         }
     )
     .generateProjectViaSwiftPM(
-        for: cocoaPod
+        for: cocoaPod,
+        scriptBuildPhases: {
+            
+            try $0.swiftLint(
+                project: [cocoaPod.product.name],
+                targetNames: [targetsSPM.allTests.name],
+                params:[
+                    """
+                    --path "\(Spec.Locations.sources)"
+                    """
+                ]
+            )
+        },
+        endingEntries: [
+            
+            """
+            
+            # default initial location for any command
+            # is inside 'Fastlane' folder
+
+            sh 'cd ./.. && bundle exec pod install'
+
+            """
+        ]
     )
     .prepare()
     .writeToFileSystem()
