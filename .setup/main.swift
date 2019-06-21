@@ -152,22 +152,16 @@ try ReadMe()
 
 // MARK: Write - SwiftLint
 
-try allSubspecs
-    .filter{ !$0.tests }
-    .map{ $0.linterCfgLocation }
-    .forEach{
-        
-        try SwiftLint
-            .standard(
-                disabledRules: [
-                    "statement_position"
-                ]
-            )
-            .prepare(
-                at: $0
-            )
-            .writeToFileSystem()
-    }
+try SwiftLint
+    .standard(
+        disabledRules: [
+            "statement_position"
+        ]
+    )
+    .prepare(
+        at: Spec.Locations.sources
+    )
+    .writeToFileSystem()
 
 // MARK: Write - License
 
