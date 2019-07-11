@@ -11,8 +11,8 @@ print("--- BEGIN of '\(Executable.name)' script ---")
 
 // MARK: Parameters
 
-Spec.BuildSettings.swiftVersion.value = "4.2"
-let swiftLangVersions = "[.v4_2]"
+Spec.BuildSettings.swiftVersion.value = "5.0"
+let swiftLangVersions = "[.v5]"
 
 let localRepo = try Spec.LocalRepo.current()
 
