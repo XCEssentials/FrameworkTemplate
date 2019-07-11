@@ -28,7 +28,6 @@ install:
 
 before_script:
   # cd ./.setup && swift run && cd ./.. # RUN this manually!
-  - bundle exec fastlane generateProjectViaSwiftPM
   - swift --version
 
 xcode_project: XCEFrameworkTemplate.xcodeproj

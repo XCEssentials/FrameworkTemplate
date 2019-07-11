@@ -96,16 +96,6 @@ try allSubspecs
             )
     }
 
-// MARK: Write - Bundler - Gemfile
-
-// https://docs.fastlane.tools/getting-started/ios/setup/#use-a-gemfile
-try Bundler
-    .Gemfile(
-        basicFastlane: true
-    )
-    .prepare()
-    .writeToFileSystem()
-
 // MARK: Write - ReadMe
 
 try ReadMe()
@@ -141,21 +131,6 @@ try License
     .MIT(
         copyrightYear: project.copyrightYear,
         copyrightEntity: cocoaPod.authors[0].name
-    )
-    .prepare()
-    .writeToFileSystem()
-
-// MARK: Write - Fastlane - Fastfile
-
-try Fastlane
-    .Fastfile
-    .ForLibrary()
-    .defaultHeader()
-    .beforeRelease(
-        podspecLocation: .from(cocoaPod)
-    )
-    .generateProjectViaSwiftPM(
-        for: cocoaPod
     )
     .prepare()
     .writeToFileSystem()
@@ -273,7 +248,6 @@ try CustomTextFile("""
 
     before_script:
       # cd ./.setup && swift run && cd ./.. # RUN this manually!
-      - bundle exec fastlane generateProjectViaSwiftPM
       - swift --version
 
     xcode_project: \(cocoaPod.product.name).\(Xcode.Project.extension)
