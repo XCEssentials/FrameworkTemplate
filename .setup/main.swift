@@ -130,7 +130,9 @@ try ReadMe()
     .prepare(
         removeRepeatingEmptyLines: false
     )
-    .writeToFileSystem()
+    .writeToFileSystem(
+        ifFileExists: .skip
+    )
 
 // MARK: Write - License
 
