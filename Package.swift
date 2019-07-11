@@ -8,34 +8,22 @@ let package = Package(
         .library(
             name: "XCEFrameworkTemplate",
             targets: [
-                "XCEFrameworkTemplateCore"
+                "XCEFrameworkTemplate"
             ]
-        ),
-        .library(
-            name: "XCEFrameworkTemplateWithOperators",
-            targets: [
-                "XCEFrameworkTemplateOperators"
-            ]
-        ),
+        )
     ],
     targets: [
         .target(
-            name: "XCEFrameworkTemplateCore",
+            name: "XCEFrameworkTemplate",
             path: "Sources/Core"
-        ),
-        .target(
-            name: "XCEFrameworkTemplateOperators",
-            dependencies: ["XCEFrameworkTemplateCore"],
-            path: "Sources/Operators"
         ),
         .testTarget(
             name: "XCEFrameworkTemplateAllTests",
             dependencies: [
-                "XCEFrameworkTemplateCore",
-                "XCEFrameworkTemplateOperators"
+                "XCEFrameworkTemplate"
             ],
             path: "Tests/AllTests"
         ),
     ],
-    swiftLanguageVersions: [.v4, .v4_2]
+    swiftLanguageVersions: [.v4_2]
 )
