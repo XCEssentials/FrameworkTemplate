@@ -1,5 +1,8 @@
 import XCTest
 
+//@testable
+import XCEFrameworkTemplate
+
 //---
 
 class AllTests: XCTestCase
