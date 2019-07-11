@@ -8,4 +8,4 @@
 
 # FrameworkTemplate
 
-Custom pipeline operators for easy chaining in Swift
+Repo description.

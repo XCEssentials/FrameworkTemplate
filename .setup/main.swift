@@ -33,7 +33,7 @@ let company = (
 
 let project = (
     name: remoteRepo.name,
-    summary: "Custom pipeline operators for easy chaining in Swift",
+    summary: "Repo description.",
     copyrightYear: 2019
 )
 
