@@ -64,23 +64,6 @@ lane :beforeRelease do
 
 end # lane :beforeRelease
 
-lane :lintThoroughly do
-
-    pod_lib_lint
-
-end # lane :lintThoroughly
-
-lane :generateProjectViaCP do
-
-    # === Regenerate project
-
-    # default initial location for any command
-    # is inside 'Fastlane' folder
-
-    sh 'cd ./.. && rm -rf "Xcode" && bundle exec pod gen --gen-directory="Xcode"'
-
-end # lane :generateProjectViaCP
-
 lane :generateProjectViaSwiftPM do
 
     # === Regenerate project
