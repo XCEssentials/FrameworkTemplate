@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/XCEssentials/RepoConfigurator",
         "state": {
           "branch": null,
-          "revision": "23ada5a819d2c77754c666a61f44882c5995c280",
-          "version": "2.7.0"
+          "revision": "5f34cdfb69ff437d4424c79d50666d185ecf5fdb",
+          "version": "3.0.1"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/nschum/SwiftHamcrest",
         "state": {
           "branch": null,
-          "revision": "034159ba9ac342372e3af119e7d80f38b5014782",
-          "version": "2.1.1"
+          "revision": "53e322984e000deefd3a5efaa777a7365c51aac9",
+          "version": "2.2.1"
         }
       },
       {
