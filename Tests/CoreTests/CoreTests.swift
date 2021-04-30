@@ -5,7 +5,7 @@ import XCEFrameworkTemplate
 
 //---
 
-class AllTests: XCTestCase
+class CoreTests: XCTestCase
 {
     override
     func setUp()
