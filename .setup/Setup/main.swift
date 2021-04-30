@@ -53,13 +53,13 @@ let targetNames: PerTarget = (
 )
 
 let dependencies = (
-    one: (
-        name: "XCEOne",
+    pipeline: (
+        name: "XCEPipeline",
         swiftPM: """
-            .package(name: "XCEOne", url: "https://github.com/XCEssentials/One", from: "1.0.0")
+            .package(name: "XCEPipeline", url: "https://github.com/XCEssentials/Pipeline", from: "3.3.0")
             """
     ),
-    two: ()
+    ()
 )
 
 // MARK: Parameters - Summary
@@ -162,13 +162,13 @@ try CustomTextFile("""
             )
         ],
         dependencies: [
-            \(dependencies.one.swiftPM)
+            \(dependencies.pipeline.swiftPM)
         ],
         targets: [
             .target(
                 name: "\(targetNames.core)",
                 dependencies: [
-                    "\(dependencies.one.name)"
+                    "\(dependencies.pipeline.name)"
                 ]
             ),
             .testTarget(

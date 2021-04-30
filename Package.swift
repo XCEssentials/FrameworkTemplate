@@ -13,13 +13,13 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: "XCEOne", url: "https://github.com/XCEssentials/One", from: "1.0.0")
+        .package(name: "XCEPipeline", url: "https://github.com/XCEssentials/Pipeline", from: "3.3.0")
     ],
     targets: [
         .target(
             name: "Core",
             dependencies: [
-                "XCEOne"
+                "XCEPipeline"
             ]
         ),
         .testTarget(
