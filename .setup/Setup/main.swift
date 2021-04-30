@@ -11,8 +11,7 @@ print("--- BEGIN of '\(Executable.name)' script ---")
 
 // MARK: Parameters
 
-Spec.BuildSettings.swiftVersion.value = "5.0"
-let swiftLangVersions = "[.v5]"
+Spec.BuildSettings.swiftVersion.value = "5.3"
 
 let localRepo = try Spec.LocalRepo.current()
 
@@ -43,30 +42,25 @@ let authors = [
     ("Maxim Khatskevich", "maxim@khatskevi.ch")
 ]
 
-typealias PerSubSpec<T> = (
+typealias PerTarget<T> = (
     core: T,
-    tests: T
+    coreTests: T
 )
 
-let subSpecs: PerSubSpec = (
+let targetNames: PerTarget = (
     "Core",
-    "AllTests"
+    "CoreTests"
 )
 
-let targetNames: PerSubSpec = (
-    productName,
-    productName + subSpecs.tests
+let dependencies = (
+    one: (
+        name: "XCEOne",
+        swiftPM: """
+            .package(name: "XCEOne", url: "https://github.com/XCEssentials/One", from: "1.0.0")
+            """
+    ),
+    two: ()
 )
-
-let sourcesLocations: PerSubSpec = (
-    Spec.Locations.sources + subSpecs.core,
-    Spec.Locations.tests + subSpecs.tests
-)
-
-let dummyFiles = [
-    sourcesLocations.core + "\(subSpecs.core).swift",
-    sourcesLocations.tests + "\(subSpecs.tests).swift"
-]
 
 // MARK: Parameters - Summary
 
@@ -74,23 +68,6 @@ localRepo.report()
 remoteRepo.report()
 
 // MARK: -
-
-// MARK: Write - Dummy files
-
-try dummyFiles
-    .forEach{
-    
-        try CustomTextFile
-            .init(
-                "//"
-            )
-            .prepare(
-                at: $0
-            )
-            .writeToFileSystem(
-                ifFileExists: .skip
-            )
-    }
 
 // MARK: Write - ReadMe
 
@@ -104,7 +81,6 @@ try ReadMe()
         repo: project.name
     )
     .addSwiftPMCompatibleBadge()
-    .addCarthageCompatibleBadge()
     .addWrittenInSwiftBadge(
         version: Spec.BuildSettings.swiftVersion.value
     )
@@ -161,7 +137,7 @@ try Git
     .add(
         """
         # we don't need to store project file,
-        # as we generate it on-demand
+        # as we can generate it on-demand
         *.\(Xcode.Project.extension)
         """
     )
@@ -185,20 +161,23 @@ try CustomTextFile("""
                 ]
             )
         ],
+        dependencies: [
+            \(dependencies.one.swiftPM)
+        ],
         targets: [
             .target(
                 name: "\(targetNames.core)",
-                path: "\(sourcesLocations.core)"
+                dependencies: [
+                    "\(dependencies.one.name)"
+                ]
             ),
             .testTarget(
-                name: "\(targetNames.tests)",
+                name: "\(targetNames.coreTests)",
                 dependencies: [
                     "\(targetNames.core)"
-                ],
-                path: "\(sourcesLocations.tests)"
+                ]
             ),
-        ],
-        swiftLanguageVersions: \(swiftLangVersions)
+        ]
     )
     """
     )

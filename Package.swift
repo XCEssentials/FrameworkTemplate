@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 
 import PackageDescription
 
@@ -8,22 +8,25 @@ let package = Package(
         .library(
             name: "XCEFrameworkTemplate",
             targets: [
-                "XCEFrameworkTemplate"
+                "Core"
             ]
         )
     ],
+    dependencies: [
+        .package(name: "XCEOne", url: "https://github.com/XCEssentials/One", from: "1.0.0")
+    ],
     targets: [
         .target(
-            name: "XCEFrameworkTemplate",
-            path: "Sources/Core"
+            name: "Core",
+            dependencies: [
+                "XCEOne"
+            ]
         ),
         .testTarget(
-            name: "XCEFrameworkTemplateAllTests",
+            name: "CoreTests",
             dependencies: [
-                "XCEFrameworkTemplate"
-            ],
-            path: "Tests/AllTests"
+                "Core"
+            ]
         ),
-    ],
-    swiftLanguageVersions: [.v5]
+    ]
 )

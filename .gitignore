@@ -80,6 +80,7 @@ playground.xcworkspace
 #
 Packages/
 Package.pins
+.swiftpm/
 .build/
 
 ### Swift Package Manager ###
@@ -92,7 +93,7 @@ Package.pins
 ### Custom repo-specific ###
 
 # we don't need to store project file,
-# as we generate it on-demand
+# as we can generate it on-demand
 *.xcodeproj
 
 ### Custom repo-specific ###
